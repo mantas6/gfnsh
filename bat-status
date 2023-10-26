@@ -6,6 +6,9 @@ bat-status() {
   local BAT="$POWER_SUPPLIES/$1"
 
   local GREEN=$(tput setaf 2)
+  local YELLOW=$(tput setaf 3)
+  local CYAN=$(tput setaf 6)
+  local PINK=$(tput setaf 5)
   local NC=$(tput sgr0)
 
   local STATUS=$(cat "$BAT/status")
@@ -13,16 +16,16 @@ bat-status() {
   local VOLTAGE=$(echo "scale=2; $(cat "$BAT/voltage_now") / 1000000" | bc)
   local VOLTAGE_CELL=$(echo "scale=2; $VOLTAGE / 3" | bc)
 
-  echo -e "Battery:        ${GREEN}$1"
+  echo -e "Battery:        ${CYAN}$1"
   printf '%s' "${NC}"
 
-  echo "Status is:      ${GREEN}$STATUS"
+  echo "Status is:      ${YELLOW}$STATUS"
   printf '%s' "${NC}"
 
   echo "Capacity is:    ${GREEN}$CAPACITY"%
   printf '%s' "${NC}"
 
-  echo "Voltage is:     ${GREEN}$VOLTAGE"V
+  echo "Voltage is:     ${PINK}$VOLTAGE"V
   printf '%s' "${NC}"
 
   echo "Voltage cell:   ${GREEN}$VOLTAGE_CELL"V
