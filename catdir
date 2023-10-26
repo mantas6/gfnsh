@@ -7,7 +7,7 @@ if [ -d "$directory" ]; then
     # Use find to locate all files in the directory
     find "$directory" -type f -print0 | while IFS= read -r -d $'\0' file; do
         echo -n "$(basename "$file"): "
-        cat "$file" | head -n 1
+        cat "$file" | head -n 1 | tr -d '\n'
         echo ""
     done
 else
