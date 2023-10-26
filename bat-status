@@ -5,16 +5,28 @@ POWER_SUPPLIES=/sys/class/power_supply
 bat-status() {
   local BAT="$POWER_SUPPLIES/$1"
 
+  local GREEN=$(tput setaf 2)
+  local NC=$(tput sgr0)
+
   local STATUS=$(cat "$BAT/status")
   local CAPACITY=$(cat "$BAT/capacity")
   local VOLTAGE=$(echo "scale=2; $(cat "$BAT/voltage_now") / 1000000" | bc)
   local VOLTAGE_CELL=$(echo "scale=2; $VOLTAGE / 3" | bc)
 
-  echo "Battery:        $1"
-  echo "Status is:      $STATUS"
-  echo "Capacity is:    $CAPACITY"%
-  echo "Voltage is:     $VOLTAGE"V
-  echo "Voltage cell:   $VOLTAGE_CELL"V
+  echo -e "Battery:        ${GREEN}$1"
+  printf '%s' "${NC}"
+
+  echo "Status is:      ${GREEN}$STATUS"
+  printf '%s' "${NC}"
+
+  echo "Capacity is:    ${GREEN}$CAPACITY"%
+  printf '%s' "${NC}"
+
+  echo "Voltage is:     ${GREEN}$VOLTAGE"V
+  printf '%s' "${NC}"
+
+  echo "Voltage cell:   ${GREEN}$VOLTAGE_CELL"V
+  printf '%s' "${NC}"
 }
 
 if [ -d "$POWER_SUPPLIES/BAT0" ]; then
