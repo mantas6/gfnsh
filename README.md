@@ -1,1 +1,1 @@
-# system-scripts
+# gfnsh - good for nothing shell scripts
