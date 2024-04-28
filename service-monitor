@@ -1,0 +1,10 @@
+#!/bin/bash
+
+handle_input() {
+    while read -r line; do
+        # Process each line of input
+        echo "Processing: $line"
+    done
+}
+
+sudo journalctl -u "$1" -f | handle_input
