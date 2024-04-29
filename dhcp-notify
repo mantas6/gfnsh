@@ -10,15 +10,14 @@ hostname=$4
 leases_file=/var/lib/dnsmasq/dnsmasq.leases
 
 
+[ "$event" != "add" ] && exit 0
+
 push() {
     "$cwd/modules/pushover.sh/pushover.sh" "$1"
 }
 
-echo "$event MAC: $mac IP: $ip hostname: $hostname"
-
-[ "$event" != "add" ] && exit 0
-
-message="Client connected $mac $hostname"
+message="Client connected $mac $hostname Assigned IP $ip"
+echo "$message"
 
 grep -qx "$mac" "$leases_file" || push "$message"
 
