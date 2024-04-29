@@ -1,0 +1,14 @@
+#!/bin/bash
+
+bat0=/sys/class/power_supply/BAT0
+bat1=/sys/class/power_supply/BAT1
+
+set-limit() {
+    echo "Setting thresholds for $1"
+    echo 65 > "$1/charge_stop_threshold"
+    echo 45 > "$1/charge_start_threshold"
+}
+
+[ -d "$bat0" ] && set-limit "$bat0"
+[ -d "$bat1" ] && set-limit "$bat1"
+
