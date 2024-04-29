@@ -13,5 +13,5 @@ echo "$event MAC: $mac IP: $ip hostname: $hostname"
 
 message="Client connected $mac $hostname"
 
-grep -qx "$mac" "$leases_file" || modules/pushover.sh/pushover.sh "$message"
+grep -qx "$mac" "$leases_file" || ./modules/pushover.sh/pushover.sh "$message"
 
