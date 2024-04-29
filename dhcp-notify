@@ -1,0 +1,17 @@
+#!/bin/bash
+
+event=$1
+mac=$2
+ip=$3
+hostname=$4
+
+leases_file=/var/lib/dnsmasq/dnsmasq.leases
+
+echo "$event MAC: $mac IP: $ip hostname: $hostname"
+
+[ "$event" != "add" ] && exit 0
+
+message="Client connected $mac $hostname"
+
+grep -qx "$mac" "$leases_file" && modules/pushover.sh "$message"
+

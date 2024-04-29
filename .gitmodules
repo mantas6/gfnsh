@@ -1,0 +1,3 @@
+[submodule "modules/pushover.sh"]
+	path = modules/pushover.sh
+	url = https://github.com/jnwatts/pushover.sh.git
