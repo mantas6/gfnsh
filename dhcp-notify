@@ -7,7 +7,7 @@ mac=$2
 ip=$3
 hostname=$4
 
-leases_file=/var/lib/dnsmasq/dnsmasq.leases
+acl=/etc/hostapd/hostapd.accept
 
 
 [ "$event" = "remove" ] && exit 0
@@ -19,5 +19,5 @@ push() {
 message="Client connected $mac $hostname Assigned IP $ip"
 echo "$message"
 
-grep "$mac" "$leases_file" || push "$message"
+grep "$mac" "$acl" || push "$message"
 
