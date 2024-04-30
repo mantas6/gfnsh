@@ -3,10 +3,18 @@
 bat0=/sys/class/power_supply/BAT0
 bat1=/sys/class/power_supply/BAT1
 
+upper=65
+lower=45
+
+case "$1" in
+    reset) upper=100; lower=0;;
+    wide) upper=80; lower=50;;
+esac
+
 set-limit() {
-    echo "Setting thresholds for $1"
-    echo 65 > "$1/charge_stop_threshold"
-    echo 45 > "$1/charge_start_threshold"
+    echo "Setting thresholds ($lower-$upper) for $1"
+    echo "$upper" > "$1/charge_stop_threshold"
+    echo "$lower" > "$1/charge_start_threshold"
 }
 
 [ -d "$bat0" ] && set-limit "$bat0"
